@@ -1,0 +1,9 @@
+{
+  "font_family": "Arial",
+  "font_size": 10,
+  "tema": "Custom",
+  "bg_color": "#ffffff",
+  "fg_color": "#212529",
+  "panel_bg": "#f8f9fa",
+  "accent_color": "#007acc"
+}

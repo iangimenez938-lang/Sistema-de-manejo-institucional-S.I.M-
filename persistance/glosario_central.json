@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Inflación",
+    "categorias": ["Economía"],
+    "subcategorias": ["Texto explicativo"],
+    "contenido": "Aumento generalizado y sostenido del nivel de precios de bienes y servicios en una economía."
+  },
+  {
+    "nombre": "Adjetivo",
+    "categorias": ["Lengua"],
+    "subcategorias": ["Texto explicativo"],
+    "contenido": "Palabra que acompaña al sustantivo para describirlo o limitarlo."
+  }
+]

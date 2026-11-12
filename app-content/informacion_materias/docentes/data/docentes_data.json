@@ -1,0 +1,74 @@
+{
+  "Ciclo Básico": {
+    "1": {
+      "A": {
+        "preceptor": "A designar",
+        "docentes": {
+          "Lengua": {
+            "nombre": "Docente a designar",
+            "cursos": "1º Año A",
+            "telefono": "Sin registrar",
+            "email": "consultas@escuelatecnica.edu.ar",
+            "horario_consulta": "A confirmar",
+            "horarios_tabla": []
+          }
+        }
+      }
+    }
+  },
+  "Ciclo Avanzado": {
+    "4": {
+      "Informática": {
+        "preceptor": "A designar",
+        "docentes": {
+          "Matemática": {
+            "nombre": "Docente a designar",
+            "cursos": "4º Año Informática",
+            "telefono": "+54 3777 0000-0000",
+            "email": "consultas@escuelatecnica.edu.ar",
+            "horarios_tabla": [
+              {
+                "dia": "Lunes",
+                "horario": "07:45 - 09:15",
+                "actividad": "Matemática",
+                "aula": "Aula 4B"
+              },
+              {
+                "dia": "Miércoles",
+                "horario": "09:30 - 11:00",
+                "actividad": "Matemática",
+                "aula": "Aula 4B"
+              },
+              {
+                "dia": "Viernes",
+                "horario": "11:15 - 12:45",
+                "actividad": "Consulta / Apoyo",
+                "aula": "Taller Central"
+              },
+              {
+                "dia": "Lunes",
+                "horario": "M1 (07:00 - 07:40)",
+                "actividad": "Matemática",
+                "aula": "Aula 4B"
+              }
+            ]
+          },
+          "Historia": {
+            "nombre": "Emanuel",
+            "cursos": "4º Año Informática",
+            "telefono": "+54 3777 0000-0000",
+            "email": "consultas@escuelatecnica.edu.ar",
+            "horarios_tabla": [
+              {
+                "dia": "Lunes",
+                "horario": "M1 (07:00 - 07:40)",
+                "actividad": "Historia",
+                "aula": "Aula 4B"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

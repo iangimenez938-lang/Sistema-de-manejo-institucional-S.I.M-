@@ -1,0 +1,119 @@
+{
+  "H": {
+    "common_name": "Hydrogen",
+    "scientific_name": "Hydrogen",
+    "classification": "Nonmetal",
+    "atomic_number": 1,
+    "atomic_mass": "4.00260 u",
+    "standard_state": "gas",
+    "electron_configuration": "1s1",
+    "oxidation_states": [
+      "+1",
+      "-1"
+    ],
+    "electronegativity_pauling": 2.2,
+    "atomic_radius_vdw": "120 pm",
+    "ionization_energy": "13.598 eV",
+    "electron_affinity": "0.754 eV",
+    "melting_point": "13.81 K",
+    "boiling_point": "20.28 K",
+    "density": "0.00008988 g/cm³",
+    "year_discovered": 1766,
+    "definition": "Hydrogen\nPubChem\nJefferson Lab, U.S. Department of Energy\nHydrogen is a commercially important element. Large amounts of hydrogen are combined with nitrogen from the air to produce ammonia (NH3) through a process called the Haber process. Hydrogen is also added to fats and oils, such as peanut oil, through a process called hydrogenation. Liquid hydrogen is used in the study of superconductors and, when combined with liquid oxygen, makes an excellent rocket fuel.\n\nHydrogen combines with other elements to form numerous compounds. Some of the common ones are: water (H2O), ammonia (NH3), methane (CH4), table sugar (C12H22O11), hydrogen peroxide (H2O2) and hydrochloric acid (HCl).\n\nHydrogen has three common isotopes. The simplest isotope, called protium, is just ordinary hydrogen. The second, a stable isotope called deuterium, was discovered in 1932. The third isotope, tritium, was discovered in 1934.",
+    "references": [
+      {
+        "title": "Hydrogen",
+        "authors": "PubChem",
+        "journal": "Jefferson Lab, U.S. Department of Energy",
+        "year": "",
+        "doi": "",
+        "summary": "Hydrogen is a commercially important element. Large amounts of hydrogen are combined with nitrogen from the air to produce ammonia (NH3) through a process called the Haber process. Hydrogen is also added to fats and oils, such as peanut oil, through a process called hydrogenation. Liquid hydrogen is used in the study of superconductors and, when combined with liquid oxygen, makes an excellent rocket fuel.\n\nHydrogen combines with other elements to form numerous compounds. Some of the common ones are: water (H2O), ammonia (NH3), methane (CH4), table sugar (C12H22O11), hydrogen peroxide (H2O2) and hydrochloric acid (HCl).\n\nHydrogen has three common isotopes. The simplest isotope, called protium, is just ordinary hydrogen. The second, a stable isotope called deuterium, was discovered in 1932. The third isotope, tritium, was discovered in 1934.",
+        "citation": "Hydrogen\nPubChem\nJefferson Lab, U.S. Department of Energy\nHydrogen is a commercially important element. Large amounts of hydrogen are combined with nitrogen from the air to produce ammonia (NH3) through a process called the Haber process. Hydrogen is also added to fats and oils, such as peanut oil, through a process called hydrogenation. Liquid hydrogen is used in the study of superconductors and, when combined with liquid oxygen, makes an excellent rocket fuel.\n\nHydrogen combines with other elements to form numerous compounds. Some of the common ones are: water (H2O), ammonia (NH3), methane (CH4), table sugar (C12H22O11), hydrogen peroxide (H2O2) and hydrochloric acid (HCl).\n\nHydrogen has three common isotopes. The simplest isotope, called protium, is just ordinary hydrogen. The second, a stable isotope called deuterium, was discovered in 1932. The third isotope, tritium, was discovered in 1934.",
+        "category": "Química"
+      }
+    ],
+    "links": [],
+    "notes": "",
+    "status": "actualizado",
+    "reference": "Hydrogen\nPubChem\nJefferson Lab, U.S. Department of Energy\nHydrogen is a commercially important element. Large amounts of hydrogen are combined with nitrogen from the air to produce ammonia (NH3) through a process called the Haber process. Hydrogen is also added to fats and oils, such as peanut oil, through a process called hydrogenation. Liquid hydrogen is used in the study of superconductors and, when combined with liquid oxygen, makes an excellent rocket fuel.\n\nHydrogen combines with other elements to form numerous compounds. Some of the common ones are: water (H2O), ammonia (NH3), methane (CH4), table sugar (C12H22O11), hydrogen peroxide (H2O2) and hydrochloric acid (HCl).\n\nHydrogen has three common isotopes. The simplest isotope, called protium, is just ordinary hydrogen. The second, a stable isotope called deuterium, was discovered in 1932. The third isotope, tritium, was discovered in 1934."
+  },
+  "He": {
+    "common_name": "Helium",
+    "scientific_name": "Helium",
+    "classification": "Nonmetal",
+    "atomic_mass": "4.00260 u",
+    "standard_state": "Gas",
+    "electron_configuration": "1s2",
+    "oxidation_states": [
+      "0"
+    ],
+    "electronegativity_pauling": ".",
+    "atomic_radius_vdw": "140 pm",
+    "ionization_energy": "24.587 eV",
+    "electron_affinity": ".",
+    "melting_point": "0.95K",
+    "boiling_point": "4.22K",
+    "density": "0.0001785 g/cm³",
+    "year_discovered": 1868,
+    "definition": "Helium\nPubChem\nJefferson Lab, U.S. Department of Energy\nHelium is commercially recovered from natural gas deposits, mostly from Texas, Oklahoma and Kansas. Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels. Helium is combined with oxygen to create a nitrogen free atmosphere for deep sea divers so that they will not suffer from a condition known as nitrogen narcosis. Liquid helium is an important cryogenic material and is used to study superconductivity and to create superconductive magnets. The Department of Energy's Jefferson Lab uses large amounts of liquid helium to operate its superconductive electron accelerator.\n\nHelium is an inert gas and does not easily combine with other elements. There are no known compounds that contain helium, although attempts are being made to produce helium diflouride (HeF2).",
+    "references": [
+      {
+        "title": "Helium",
+        "authors": "PubChem",
+        "journal": "Jefferson Lab, U.S. Department of Energy",
+        "year": "",
+        "doi": "",
+        "summary": "Helium is commercially recovered from natural gas deposits, mostly from Texas, Oklahoma and Kansas. Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels. Helium is combined with oxygen to create a nitrogen free atmosphere for deep sea divers so that they will not suffer from a condition known as nitrogen narcosis. Liquid helium is an important cryogenic material and is used to study superconductivity and to create superconductive magnets. The Department of Energy's Jefferson Lab uses large amounts of liquid helium to operate its superconductive electron accelerator.\n\nHelium is an inert gas and does not easily combine with other elements. There are no known compounds that contain helium, although attempts are being made to produce helium diflouride (HeF2).",
+        "citation": "Helium\nPubChem\nJefferson Lab, U.S. Department of Energy\nHelium is commercially recovered from natural gas deposits, mostly from Texas, Oklahoma and Kansas. Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels. Helium is combined with oxygen to create a nitrogen free atmosphere for deep sea divers so that they will not suffer from a condition known as nitrogen narcosis. Liquid helium is an important cryogenic material and is used to study superconductivity and to create superconductive magnets. The Department of Energy's Jefferson Lab uses large amounts of liquid helium to operate its superconductive electron accelerator.\n\nHelium is an inert gas and does not easily combine with other elements. There are no known compounds that contain helium, although attempts are being made to produce helium diflouride (HeF2).",
+        "category": "Química"
+      },
+      {
+        "title": "Helium",
+        "authors": "PubChem",
+        "journal": "Jefferson Lab, U.S. Department of Energy",
+        "year": "",
+        "doi": "",
+        "summary": "Helium is commercially recovered from natural gas deposits, mostly from Texas, Oklahoma and Kansas. Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels. Helium is combined with oxygen to create a nitrogen free atmosphere for deep sea divers so that they will not suffer from a condition known as nitrogen narcosis. Liquid helium is an important cryogenic material and is used to study superconductivity and to create superconductive magnets. The Department of Energy's Jefferson Lab uses large amounts of liquid helium to operate its superconductive electron accelerator.\n\nHelium is an inert gas and does not easily combine with other elements. There are no known compounds that contain helium, although attempts are being made to produce helium diflouride (HeF2).",
+        "citation": "Helium\nPubChem\nJefferson Lab, U.S. Department of Energy\nHelium is commercially recovered from natural gas deposits, mostly from Texas, Oklahoma and Kansas. Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels. Helium is combined with oxygen to create a nitrogen free atmosphere for deep sea divers so that they will not suffer from a condition known as nitrogen narcosis. Liquid helium is an important cryogenic material and is used to study superconductivity and to create superconductive magnets. The Department of Energy's Jefferson Lab uses large amounts of liquid helium to operate its superconductive electron accelerator.\n\nHelium is an inert gas and does not easily combine with other elements. There are no known compounds that contain helium, although attempts are being made to produce helium diflouride (HeF2).",
+        "category": "Química"
+      },
+      {
+        "title": "Helium",
+        "authors": "PubChem",
+        "journal": "Jefferson Lab, U.S. Department of Energy",
+        "year": "",
+        "doi": "",
+        "summary": "Helium is commercially recovered from natural gas deposits, mostly from Texas, Oklahoma and Kansas. Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels. Helium is combined with oxygen to create a nitrogen free atmosphere for deep sea divers so that they will not suffer from a condition known as nitrogen narcosis. Liquid helium is an important cryogenic material and is used to study superconductivity and to create superconductive magnets. The Department of Energy's Jefferson Lab uses large amounts of liquid helium to operate its superconductive electron accelerator.\n\nHelium is an inert gas and does not easily combine with other elements. There are no known compounds that contain helium, although attempts are being made to produce helium diflouride (HeF2).",
+        "citation": "Helium\nPubChem\nJefferson Lab, U.S. Department of Energy\nHelium is commercially recovered from natural gas deposits, mostly from Texas, Oklahoma and Kansas. Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels. Helium is combined with oxygen to create a nitrogen free atmosphere for deep sea divers so that they will not suffer from a condition known as nitrogen narcosis. Liquid helium is an important cryogenic material and is used to study superconductivity and to create superconductive magnets. The Department of Energy's Jefferson Lab uses large amounts of liquid helium to operate its superconductive electron accelerator.\n\nHelium is an inert gas and does not easily combine with other elements. There are no known compounds that contain helium, although attempts are being made to produce helium diflouride (HeF2).",
+        "category": "Química"
+      }
+    ],
+    "links": [],
+    "notes": "",
+    "status": "actualizado",
+    "reference": "Helium\nPubChem\nJefferson Lab, U.S. Department of Energy\nHelium is commercially recovered from natural gas deposits, mostly from Texas, Oklahoma and Kansas. Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels. Helium is combined with oxygen to create a nitrogen free atmosphere for deep sea divers so that they will not suffer from a condition known as nitrogen narcosis. Liquid helium is an important cryogenic material and is used to study superconductivity and to create superconductive magnets. The Department of Energy's Jefferson Lab uses large amounts of liquid helium to operate its superconductive electron accelerator.\n\nHelium is an inert gas and does not easily combine with other elements. There are no known compounds that contain helium, although attempts are being made to produce helium diflouride (HeF2).",
+    "atomic_number": null
+  },
+  "Mc": {
+    "common_name": "",
+    "scientific_name": "",
+    "classification": "",
+    "atomic_mass": "",
+    "standard_state": "",
+    "electron_configuration": "",
+    "oxidation_states": [],
+    "electronegativity_pauling": null,
+    "atomic_radius_vdw": "",
+    "ionization_energy": "",
+    "electron_affinity": "",
+    "melting_point": "",
+    "boiling_point": "",
+    "density": "",
+    "year_discovered": null,
+    "definition": "",
+    "references": [],
+    "links": [],
+    "notes": "",
+    "status": "pendiente"
+  }
+}

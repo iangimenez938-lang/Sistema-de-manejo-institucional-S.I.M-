@@ -1,0 +1,121 @@
+NOTAS_PROGRESO
+=============
+
+Fecha: 2026-11-10
+Estado actual: versión estable consolidada, con base funcional y modular.
+
+Resumen ejecutivo
+-----------------
+Este documento recoge la evolución del proyecto y las prioridades de trabajo para las siguientes actualizaciones. Su finalidad es dejar claro qué se ha desarrollado hasta este punto y qué aspectos deben mejorarse para que la aplicación siga creciendo de forma ordenada.
+
+Principios fundamentales del proyecto
+------------------------------------
+
+1. Trabajo honesto
+- Reconozco que no me gusta depender de la IA como sustituto del trabajo propio, pero también entiendo que, como estudiante, es necesario reconocer la ayuda que un sistema como este puede ofrecer.
+- En consecuencia, el trabajo se desarrollará con transparencia y responsabilidad.
+- Siempre se dejará claro que la asistencia de IA ha sido utilizada como apoyo y no como reemplazo del esfuerzo personal y del criterio propio.
+
+2. Marca personal yoriginalidad
+- Este proyecto es una propuesta personal y representa un esfuerzo serio de aprendizaje y construcción.
+- No quiero que el trabajo contenga contenido robado, copiado o reutilizado sin reconocimiento.
+- La aplicación debe mantener un enfoque propio, con decisiones autorales, contenido original y respeto por la propiedad intelectual ajena.
+
+3. Accesibilidad como prioridad
+- La accesibilidad será una prioridad por encima de mejoras estéticas o funcionales que no aporten inclusión.
+- La app debe buscar ser lo más usable posible para personas con baja visión, baja audición, dificultades de lectura, dificultades motoras y otras necesidades de acceso.
+- La mejora de la accesibilidad no será un añadido opcional, sino un criterio central del desarrollo.
+
+Cronología del proyecto
+----------------------
+
+0.1.0 - Primera idea y prototipo
+- Se planteó la aplicación como herramienta educativa modular.
+- Se definió la estructura por materias y secciones.
+- Se empezó a visualizar la interfaz como una aplicación con diferentes apartados.
+
+0.3.0 - Diseño inicial de estructura
+- Se organizó el proyecto por carpetas y módulos.
+- Se separaron la navegación, el contenido y la persistencia.
+- Se identificó la necesidad de mantener una base ordenada para escalar en el futuro.
+
+0.5.0 - Primeras pruebas de interfaz y contenido
+- Se avanzó en la construcción de pantallas principales.
+- Se probaron primeras versiones del contenido y la navegación.
+- Se detectaron errores de integración y flujo entre módulos.
+
+0.8.0 - Consolidación funcional
+- Se reforzó la estructura general de materias.
+- Se integraron más módulos de contenido y lógica de carga.
+- Se corrigieron inconsistencias de diseño y organización.
+
+1.0.0 - Versión estable consolidada
+- Se dejó una base funcional con estructura clara y modular.
+- Se estabilizaron los componentes principales.
+- Se validó la ejecución general del proyecto como base de trabajo.
+
+1.0.1 - Corrección de detalles y preparación para mantenimiento
+- Revisión de imports, rutas y carga de módulos.
+- Ajuste de errores menores de estabilidad.
+- Mejora de mensajes de error y manejo de archivos faltantes.
+- Organización de la base para facilitar futuras modificaciones.
+
+1.1.0 - Mejoras de experiencia de usuario
+- Mejora de la navegación entre secciones.
+- Orden más claro de materias y apartados.
+- Ajuste del feedback visual para acciones del usuario.
+
+1.2.0 - Revisión de persistencia y datos
+- Organización y validación de archivos locales.
+- Mayor control sobre almacenamiento y configuración.
+- Preparación para compatibilidad entre versiones futuras.
+
+1.3.0 - Enriquecimiento del contenido didáctico
+- Reorganización por bloques temáticos.
+- Mejora de explicaciones, ejemplos y estructura educativa.
+- Base para que el contenido siga creciendo con claridad.
+
+1.4.0 - Preparación para crecimiento escalable
+- Plantillas reutilizables para nuevas secciones.
+- Estandarización de la estructura interna del proyecto.
+- Documentación para ampliar sin romper la app.
+
+1.5.0 - Profesionalización del proyecto
+- Revisión del sistema de actualizaciones y mantenimiento.
+- Mejora del ciclo de versiones y release.
+- Preparación para una evolución más sostenida.
+
+Prioridades para las siguientes actualizaciones
+----------------------------------------------
+
+1. Estabilidad y mantenimiento
+- centralizar rutas y configuración
+- revisar imports y dependencias
+- mejorar manejo de errores
+- reforzar pruebas automatizadas
+
+2. Experiencia de usuario
+- mejorar navegación visual
+- añadir búsqueda y filtros
+- consolidar diseño de pantallas
+- mejorar feedback de la interfaz
+
+3. Contenido y calidad educativa
+- reorganizar temas por bloques
+- ampliar explicaciones y ejemplos
+- preparar plantillas para nuevas materias
+- mejorar apoyo docente
+
+4. Persistencia y datos
+- revisar estructura de archivos JSON
+- validar datos corruptos o incompletos
+- preparar migración entre versiones
+
+5. Distribución y documentación
+- mejorar versionado y releases
+- fortalecer documentación técnica
+- preparar mantenimiento y soporte del proyecto
+
+Conclusión
+----------
+La prioridad inmediata debe seguir siendo la estabilidad, la claridad y la facilidad para ampliar la aplicación, sin incrementar la complejidad del sistema de forma desordenada.

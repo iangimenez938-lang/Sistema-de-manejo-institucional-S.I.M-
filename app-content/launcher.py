@@ -1,0 +1,304 @@
+import sys 
+import os 
+from pathlib import Path 
+import tkinter as tk 
+from tkinter import ttk, messagebox 
+import importlib 
+
+# Diccionario de rutas para importación dinámica 
+MAPEO_MATERIAS = { 
+    # Materias Generales (Preexistentes y Nuevas) 
+    "historia": "materias_generales.historia", 
+    "matematica": "materias_generales.matematica", 
+    "economia": "materias_generales.economia", 
+    "lengua": "materias_generales.lengua",
+    "tecnologia": "materias_generales.tecnologia", 
+    "tic": "materias_generales.tic", 
+    "fisica": "materias_generales.fisica", 
+    "ingles": "materias_generales.ingles", 
+    "ed_fisica": "materias_generales.ed_fisica",
+    "informatica": "materias_taller.informatica",
+    # Laboratorios Específicos de 4to Informática 
+    "labs_programacion": "materias_taller.informatica.labs_programacion",
+    "labs_hardware": "materias_taller.informatica.labs_hardware",
+    "labs_aplicaciones": "materias_taller.informatica.labs_aplicaciones",
+    "labs_sistemas": "materias_taller.informatica.labs_sistemas",
+    "programacion": "materias_taller.informatica.labs_programacion",
+    "hardware": "materias_taller.informatica.labs_hardware",
+    "aplicaciones": "materias_taller.informatica.labs_aplicaciones",
+    "sistemas": "materias_taller.informatica.labs_sistemas",
+}
+
+def _ensure_app_content_on_path():
+    """Allow imports in both dev and PyInstaller/frozen layouts."""
+    candidates = []
+
+    current_file = Path(__file__).resolve() if "__file__" in globals() else Path.cwd()
+    current_dir = current_file.parent
+
+    candidates.append(current_dir)
+    if current_dir.name != "app-content":
+        candidates.append(current_dir / "app-content")
+    else:
+        candidates.append(current_dir)
+
+    if getattr(sys, "frozen", False):
+        meipass_dir = Path(getattr(sys, "_MEIPASS", "")).resolve()
+        if meipass_dir.exists():
+            candidates.extend([meipass_dir, meipass_dir / "app-content"])
+        exe_dir = Path(sys.executable).resolve().parent
+        candidates.extend([exe_dir, exe_dir / "app-content"])
+
+    seen = set()
+    for candidate in candidates:
+        candidate = candidate.resolve() if candidate.exists() else candidate
+        if not candidate.exists() or not candidate.is_dir():
+            continue
+        candidate_str = str(candidate)
+        if candidate_str not in seen:
+            seen.add(candidate_str)
+            if candidate_str not in sys.path:
+                sys.path.insert(0, candidate_str)
+
+    # Common packaged layout: launcher sits beside app-content instead of inside it.
+    root_dir = current_dir.parent if current_dir.name == "app-content" else current_dir
+    sibling_app_content = root_dir / "app-content"
+    if sibling_app_content.exists() and str(sibling_app_content) not in sys.path:
+        sys.path.insert(0, str(sibling_app_content))
+
+
+_ensure_app_content_on_path()
+
+try: 
+    HAS_TKINTER = True 
+except ImportError: 
+    HAS_TKINTER = False 
+    
+# 1. IMPORTACIONES PRESERVADAS + NUEVAS (Aditivas) 
+from creditos_app import mostrar_creditos 
+from configuracion.opciones_app import build_opciones_app_ui 
+from configuracion.config_manager import cargar_configuracion, aplicar_estilos_ttk, aplicar_estilos_globales 
+from vistas import ( SelectorMateriaUI, HeaderBar, StatusBar, PanelBase, CardButton, VistaCursoUI ) 
+from vistas.vista_curso import obtener_info_materia
+from informacion_materias.docentes.docentes_ui import VistaDocentePage
+
+class LauncherApp: 
+    """Lanzador Principal del Sistema Educativo Técnico.""" 
+    
+    def __init__(self, root): 
+        if not HAS_TKINTER: 
+            print("Error: Tkinter no está disponible en el sistema.") 
+            return 
+        
+        self.root = root 
+        
+        # ✅ NUEVO: Carga e Inyección de Estilos Globales al arrancar  
+        self.config = cargar_configuracion() 
+        aplicar_estilos_ttk(self.root, self.config) 
+        
+        self.root.title("Sistema Educativo Técnico - Lanzador General") 
+        self.root.geometry("1150x750") 
+        self.root.minsize(950, 650) 
+        self.contexto_actual = {}  
+        
+        # ✅ PRESERVADO + MEJORADO: HeaderBar con botones de navegación  
+        self.header = HeaderBar(
+            self.root,
+            titulo="🏛️ Escuela de Educación Técnica - Plataforma Educativa",
+            subtitulo="Gestión Modular por Ciclos, Cursos y Materias Centrales",
+            bg_color=self.config.get("accent_color", "#007acc"),
+            fg_title="#ffffff",
+            fg_subtitle="#edf7ff",
+            button_bg=self.config.get("panel_bg", "#f8f9fa"),
+            button_fg=self.config.get("accent_color", "#007acc"),
+            on_home_click=self._mostrar_pantalla_bienvenida,
+            on_config_click=self._abrir_opciones,
+            on_creditos_click=self._abrir_creditos,
+        )
+        
+        # ✅ PRESERVADO: Selector Dinámico de Cursos (Ciclo/Año/Esp/Div)  
+        self.selector = SelectorMateriaUI( self.root, on_materia_selected_callback=self._cargar_vista_curso )  
+        
+        # ✅ PRESERVADO: Contenedor Dinámico Principal  
+        self.frame_contenido = tk.Frame(self.root, bg="#ffffff", bd=1, relief="solid") 
+        self.frame_contenido.pack(fill="both", expand=True, padx=10, pady=(0, 6))  
+        
+        # ✅ PRESERVADO: Barra de Estado Inferior  
+        self.status_bar = StatusBar(self.root, text_inicial="Listo. Selecciona un curso arriba.", bg_color="#1f2937", fg_color="#ffffff") 
+        # Cargar la pantalla de bienvenida inicial 
+        self._mostrar_pantalla_bienvenida() 
+        
+    def _limpiar_contenido(self): 
+        """Destruye los widgets anteriores antes de cargar una nueva vista.""" 
+        for widget in self.frame_contenido.winfo_children(): 
+            widget.destroy() 
+            
+    # ✅ PRESERVADO + MEJORADO: Pantalla de Bienvenida con Accesos  
+    def _mostrar_pantalla_bienvenida(self): 
+        """Pantalla inicial del lanzador con accesos rápidos e información institucional.""" 
+        self._limpiar_contenido() 
+        if hasattr(self, 'status_bar'): 
+            self.status_bar.set_mensaje("Listo. Selecciona un curso arriba.") 
+            
+        container = tk.Frame(self.frame_contenido, bg="#ffffff", padx=20, pady=20) 
+        container.pack(fill="both", expand=True) 
+        
+        lbl_bienvenida = tk.Label( container, text="👋 ¡Bienvenido al Portal Educativo TÉCNICO!", font=("Arial", 16, "bold"), fg="#007acc", bg="#ffffff" ) 
+        lbl_bienvenida.pack(anchor="w", pady=(0, 6)) 
+        
+        lbl_desc = tk.Label( container, text=( "Esta aplicación organiza el plan de estudio de la educación técnica secundaria " "en Ciclo Básico (1º a 3º año) y Ciclo Avanzado (4º a 7º año por Especialidad).\n" "Para comenzar, utiliza el selector superior para elegir tu curso o navega desde los accesos rápidos." ), font=("Arial", 10), fg="#555555", bg="#ffffff", justify="left" ) 
+        lbl_desc.pack(anchor="w", pady=(0, 16)) 
+
+        aplicar_estilos_globales(container, self.config)
+        
+        # Panel de Accesos Rápidos (Conservando todos los botones anteriores + agregando Opciones) 
+        pnl_accesos = PanelBase(container, titulo="📌 Información y Herramientas del Sistema", bg_color=self.config.get("panel_bg", "#f8f9fa"), fg_color=self.config.get("accent_color", "#007acc")) 
+        pnl_accesos.pack(fill="x", pady=8) 
+        
+        grid_frame = tk.Frame(pnl_accesos, bg=self.config.get("panel_bg", "#f8f9fa")) 
+        grid_frame.pack(fill="x", pady=4) 
+
+        aplicar_estilos_globales(pnl_accesos, self.config)
+        aplicar_estilos_globales(grid_frame, self.config)
+        
+        # ⚙️ Personalización Visual (NUEVO) 
+        btn_opciones = CardButton(grid_frame, text="Personalización Visual", command=self._abrir_opciones, icon="⚙️", bg=self.config.get("panel_bg", "#f8f9fa"), fg=self.config.get("accent_color", "#007acc"), activebackground="#dfefff")
+        btn_opciones.pack(side="left", padx=6) 
+        
+        # ℹ️ Créditos (PRESERVADO) 
+        btn_creditos = CardButton(grid_frame, text="Créditos e Información", command=self._abrir_creditos, icon="ℹ️", bg=self.config.get("panel_bg", "#f8f9fa"), fg=self.config.get("accent_color", "#007acc"), activebackground="#dfefff")
+        btn_creditos.pack(side="left", padx=6) 
+        
+        # 📖 Manual de Uso (PRESERVADO) 
+        btn_ayuda = CardButton(grid_frame, text="Manual de Uso y Estructura", command=self._mostrar_manual, icon="📖", bg=self.config.get("panel_bg", "#f8f9fa"), fg=self.config.get("accent_color", "#007acc"), activebackground="#dfefff")
+        btn_ayuda.pack(side="left", padx=6)
+        
+    # ✅ PRESERVADO: Dashboard del Curso  
+    def _cargar_vista_curso(self, contexto: dict): 
+        """Abre la pantalla del curso con su información y grilla de materias.""" 
+        # 🔄 Recargar tema global antes de abrir el curso 
+        self.config = cargar_configuracion() 
+        aplicar_estilos_globales(self.root, self.config) 
+        
+        self.contexto_actual = contexto or {} 
+        self._limpiar_contenido()        
+        ciclo = self.contexto_actual.get("ciclo") 
+        anio = self.contexto_actual.get("anio") 
+        esp_div = ( self.contexto_actual.get("division") if ciclo == "Ciclo Básico" else self.contexto_actual.get("especialidad") ) 
+        
+        self.status_bar.set_mensaje(f"🏫 Curso Activo: {anio}º Año ({esp_div}) - {ciclo}") 
+        
+        # Renderizar la Vista del Curso 
+        VistaCursoUI(
+            self.frame_contenido,
+            contexto=self.contexto_actual,
+            on_materia_selected_callback=self._cargar_materia_modulo,
+            on_back_callback=self._mostrar_pantalla_bienvenida,
+            on_docente_selected_callback=self._cargar_vista_docente,
+        )
+        aplicar_estilos_globales(self.frame_contenido, self.config)
+
+    def _cargar_vista_docente(self, contexto: dict):
+        """Carga la ficha del docente en el mismo contenedor principal, como otra vista interna del curso."""
+        contexto = contexto or {}
+        contexto = {**self.contexto_actual, **contexto}
+        self.contexto_actual = contexto
+        self._limpiar_contenido()
+
+        materia = contexto.get("materia", "Materia")
+        self.status_bar.set_mensaje(f"👨‍🏫 Docente: {materia}")
+
+        if not VistaDocentePage:
+            messagebox.showinfo("Docentes", f"Ficha del docente para {materia}.")
+            self._cargar_vista_curso(self.contexto_actual)
+            return
+
+        VistaDocentePage(
+            self.frame_contenido,
+            contexto=contexto,
+            on_back_callback=lambda: self._cargar_vista_curso(self.contexto_actual),
+        )
+        aplicar_estilos_globales(self.frame_contenido, self.config)
+
+    # ✅ PRESERVADO: Inyección de Módulo Central de Materia
+    def _cargar_materia_modulo(self, contexto):
+        if isinstance(contexto, str):
+            materia = contexto
+            contexto = dict(self.contexto_actual)
+            contexto["materia"] = materia
+            contexto["modulo_central"] = materia
+        else:
+            contexto = contexto or {}
+            contexto = {**self.contexto_actual, **contexto}
+
+        self.contexto_actual = contexto
+        self._limpiar_contenido()
+
+        mod_key = self.contexto_actual.get("modulo_central") or self.contexto_actual.get("materia") or "materia_generica"
+        materia_nombre = self.contexto_actual.get("materia", "Sin Nombre")
+        self.status_bar.set_mensaje(f"📚 Materia Activa: {materia_nombre}")
+
+        # Resolver el módulo de forma general para cualquier materia registrada
+        modulo_path = MAPEO_MATERIAS.get(mod_key)
+        if not modulo_path:
+            _, info = obtener_info_materia(mod_key)
+            modulo_path = info.get("modulo_path")
+
+        if modulo_path:
+            try:
+                modulo = importlib.import_module(modulo_path)
+
+                if hasattr(modulo, "build_ui"):
+                    modulo.build_ui(self.frame_contenido, contexto=self.contexto_actual, on_back_callback=lambda: self._cargar_vista_curso(self.contexto_actual))
+                    return
+                elif hasattr(modulo, "crear_vista_matematica"):
+                    modulo.crear_vista_matematica(self.frame_contenido, contexto=self.contexto_actual, on_back_callback=lambda: self._cargar_vista_curso(self.contexto_actual))
+                    return
+            except Exception as e:
+                print(f"Error al cargar el módulo '{mod_key}': {e}")
+                self._mostrar_materia_en_desarrollo(self.contexto_actual)
+        else:
+            self._mostrar_materia_en_desarrollo(self.contexto_actual)
+
+    # ✅ PRESERVADO: Ficha para Materias en Proceso de Desarrollo  
+    def _mostrar_materia_en_desarrollo(self, contexto: dict): 
+        container = tk.Frame(self.frame_contenido, bg="#ffffff", padx=20, pady=20) 
+        container.pack(fill="both", expand=True) 
+        aplicar_estilos_globales(container, self.config)
+        
+        btn_volver = tk.Button( container, text="⬅️ Volver al Curso", command=lambda: self._cargar_vista_curso(contexto), bg="#e0e0e0", font=("Arial", 9, "bold") ) 
+        btn_volver.pack(anchor="w", pady=(0, 10)) 
+        
+        header_frame = tk.Frame(container, bg="#e0f2fe", padx=12, pady=10, bd=1, relief="solid") 
+        header_frame.pack(fill="x", pady=(0, 16)) 
+        
+        tk.Label( header_frame, text=f"📚 {contexto.get('materia', '').upper()}", font=("Arial", 14, "bold"), fg="#007acc", bg="#e0f2fe" ).pack(anchor="w") 
+        
+        tk.Label( header_frame, text=f"Módulo Central: '{contexto.get('modulo_central')}'", font=("Arial", 10), bg="#e0f2fe" ).pack(anchor="w")  
+        
+    # ✅ NUEVOS / PRESERVADOS: Métodos de los Botones  
+    def _abrir_opciones(self): 
+        """Abre la pantalla de personalización visual (colores, fuentes, temas).""" 
+        self._limpiar_contenido() 
+        if hasattr(self, 'status_bar'): 
+            self.status_bar.set_mensaje("⚙️ Personalización Visual del Sistema") 
+        build_opciones_app_ui(self.frame_contenido, root=self.root) 
+        
+    def _abrir_creditos(self): 
+        """Abre la ventana emergente de Créditos e Información Institucional.""" 
+        mostrar_creditos(self.root) 
+        
+    def _mostrar_manual(self): 
+        """Abre la ventana informativa del Manual de Uso.""" 
+        messagebox.showinfo( "Manual de Uso", "1. Selecciona Ciclo, Año y División/Especialidad en el selector superior.\n" "2. Presiona '🚀 Cargar Curso' para ver el Dashboard con las asignaturas.\n" "3. Haz clic en la tarjeta de cualquier materia para ingresar a su módulo central.\n" "4. Utiliza los botones del encabezado para volver a Inicio o ajustar los Colores y Fuentes." ) 
+        
+def main(): 
+    if not HAS_TKINTER: 
+        return 
+    
+    root = tk.Tk() 
+    app = LauncherApp(root) 
+    root.mainloop() 
+    
+if __name__ == "__main__": 
+    main()
