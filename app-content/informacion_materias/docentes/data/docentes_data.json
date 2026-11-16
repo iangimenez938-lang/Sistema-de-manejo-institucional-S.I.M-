@@ -54,18 +54,11 @@
             ]
           },
           "Historia": {
-            "nombre": "Emanuel",
+            "nombre": "Docente a designar",
             "cursos": "4º Año Informática",
             "telefono": "+54 3777 0000-0000",
             "email": "consultas@escuelatecnica.edu.ar",
-            "horarios_tabla": [
-              {
-                "dia": "Lunes",
-                "horario": "M1 (07:00 - 07:40)",
-                "actividad": "Historia",
-                "aula": "Aula 4B"
-              }
-            ]
+            "horarios_tabla": []
           }
         }
       }

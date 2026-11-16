@@ -8,6 +8,7 @@ if str(APP_CONTENT) not in sys.path:
     sys.path.insert(0, str(APP_CONTENT))
 
 from informacion_materias.docentes.docentes_manager import DocentesManager
+from informacion_materias.docentes.docentes_ui import VistaDocentePage
 
 
 class DocentesManagerTests(unittest.TestCase):
@@ -63,6 +64,41 @@ class DocentesManagerTests(unittest.TestCase):
             self.assertEqual(doc["telefono"], "5678")
             self.assertEqual(doc["horarios_tabla"][0]["dia"], "Martes")
             self.assertEqual(doc["horarios_tabla"][0]["aula"], "Aula 8")
+
+    def test_persistir_horarios_docente_guarda_una_celda_libre(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            json_path = Path(tmp_dir) / "docentes_data.json"
+            manager = DocentesManager(filepath=json_path)
+            manager.asignar_docente(
+                "Ciclo Básico",
+                1,
+                "A",
+                "Historia",
+                {
+                    "nombre": "Laura Pérez",
+                    "cursos": "1º Año A",
+                    "telefono": "1234",
+                    "email": "laura@example.com",
+                    "horarios_tabla": [
+                        {"dia": "Lunes", "horario": "M1 (07:00 - 07:40)", "actividad": "Historia 4to", "aula": "Aula 4B"},
+                    ],
+                },
+            )
+
+            self.assertTrue(
+                VistaDocentePage._persistir_horarios_docente(
+                    manager,
+                    "Ciclo Básico",
+                    1,
+                    "A",
+                    "Historia",
+                    [],
+                )
+            )
+
+            reloaded = DocentesManager(filepath=json_path)
+            doc = reloaded.obtener_docente_materia("Ciclo Básico", 1, "A", "Historia")
+            self.assertEqual(doc["horarios_tabla"], [])
 
 
 if __name__ == "__main__":

@@ -58,6 +58,13 @@ BaseFrame = tk.Frame if HAS_TKINTER else object
 
 class VistaDocentePage(BaseFrame):
     """ Pantalla interactiva completa de Ficha de Docente: - Visualización y edición emergente de datos de contacto (Nombre, Cursos, Teléfono, Mail) - Formulario dinámico para agregar, editar y eliminar filas en la Tabla de Horarios - Persistencia automática de cambios en JSON a través de DocentesManager """ 
+
+    @staticmethod
+    def _persistir_horarios_docente(manager, ciclo, anio, esp_div, materia, horarios):
+        doc_actual = manager.obtener_docente_materia(ciclo, anio, esp_div, materia)
+        doc_actual["horarios_tabla"] = list(horarios)
+        return manager.asignar_docente(ciclo, anio, esp_div, materia, doc_actual)
+
     def __init__(self, parent=None, contexto: dict | None = None, on_back_callback=None): 
         if not HAS_TKINTER:
             return
@@ -240,12 +247,14 @@ class VistaDocentePage(BaseFrame):
                 else:
                     tabla_horarios.append(nuevo_item)
 
+                self._persistir_horarios_docente(self.manager, ciclo, anio, esp_div, materia, tabla_horarios)
                 recargar_tabla()
                 top.destroy()
 
             def _vaciar_celda():
                 if item is not None and idx is not None:
                     tabla_horarios.pop(idx)
+                self._persistir_horarios_docente(self.manager, ciclo, anio, esp_div, materia, tabla_horarios)
                 recargar_tabla()
                 top.destroy()
 
@@ -339,9 +348,7 @@ class VistaDocentePage(BaseFrame):
         recargar_tabla()
 
         def _guardar_tabla_completa(): 
-            doc_actual = self.manager.obtener_docente_materia(ciclo, anio, esp_div, materia)
-            doc_actual["horarios_tabla"] = tabla_horarios
-            if self.manager.asignar_docente(ciclo, anio, esp_div, materia, doc_actual):
+            if self._persistir_horarios_docente(self.manager, ciclo, anio, esp_div, materia, tabla_horarios):
                 if HAS_TKINTER: messagebox.showinfo("💾 Guardado", "¡La tabla de horarios fue guardada con éxito en el sistema!")
             _update_scrollregion()
 

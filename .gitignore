@@ -1,0 +1,45 @@
+# --- Python / entorno ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# --- VS Code / editor ---
+.vscode/
+
+# --- Build / packaging ---
+build/
+dist/
+release/
+*.spec
+*.exe
+
+# --- Logs / temporales ---
+*.log
+*.tmp
+*.bak
+buildlog.txt
+
+# --- Datos de ejecución / persistencia local ---
+persistance/
+Other/
+
+# --- Archivos del proyecto que no son fuente principal ---
+NOT_IMPORTANT/
+explicaciones/
+
+# --- Archivos de pruebas y notas de desarrollo ---
+test_check_updater.py
+NOTAS_PROGRESO
+NOTAS_PROGRESO.md
+
+# --- Opcional: si quieres ignorar resultados de PyInstaller ---
+*.toc
+*.pyz
+*.html
+
+# --- Git local ---
+.git/
